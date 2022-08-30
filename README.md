@@ -7,7 +7,7 @@
 
 ## Part 1: Programming with C++
 
-- [ ] Basic programming
+- [x] Basic programming
 - [ ] Function, code structure
 - [ ] Recursion
 - [ ] Bit, byte, two’s complement
