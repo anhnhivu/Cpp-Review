@@ -47,7 +47,7 @@ int main() {
     cin >> year;
     if (year > 9999)
         cout << "Invalid.\n";
-    cout << "Enter the day number: ";
+    cout << "Enter the day number (1-366): ";
     cin >> noOfDate;
     if (noOfDate > 366 || noOfDate == 0)
         cout << "Invalid.\n";

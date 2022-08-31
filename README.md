@@ -1,4 +1,4 @@
-# Cpp-Review
+# C++ Review
 
 ## Objective
 
@@ -36,6 +36,13 @@
 - [ ] Multithreading programming
 - [ ] TCP/IP
 - [ ] Network programming
+
+## Exercises:
+- [ ] Two's complement
+- [ ] Reversed Polish Notation
+- [ ] Big integer
+- [ ] AVL tree demo
+- [ ] Reader - Writer Problem
 
 ## Reference
 - [1] Bài tập Kỹ thuật lập trình, Nguyễn Tấn Trần Minh Khang, Nhà sách ĐH KHTN TP. HCM
