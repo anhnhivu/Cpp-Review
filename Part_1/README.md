@@ -1,6 +1,6 @@
 # Part 1: Programming with C++
 
-## Basic Programming
+## Basic Programming -> updated
 
 - [x] 23. Đếm số lượng “ước số” của số nguyên dương n.
 - [x] 42. Cho n là số nguyên dương. Hãy tìm giá trị nguyên dương k lớn nhất sao  cho S(k) < n. 
@@ -20,7 +20,7 @@ Trong đó chuỗi S(k) được định nghĩa như sau : S(k) = 1 + 2 + 3 + ..
 - [x] 157. Cho mảng một chiều các số thực, hãy tìm đoạn [a,b] sao cho đoạn này chứa tất cả các giá trị trong mảng (timdoan).
 - [x] 169.(*) Cho mảng một chiều các số nguyên. Hãy viết hàm tìm số chẵn lớn nhất nhỏ hơn mọi giá trị lẻ có trong mảng.
 - [x] 253. Hãy cho biết tất cả các phần tử trong mảng a có nằm trong mảng b hay không?
-- [x] 261. Hãy sắp xếp các số dương trong mảng các số thực tăng dần các số âm giữ nguyên vị trí của chúng trong mảng (sapxepduong).
+
 - [x] 304.(*) Cho mảng một chiều các số nguyên và một số nguyên M. Hãy tìm một mảng con sao cho tổng các phần tử trong mảng bằng M.
 
 ## Struct
@@ -60,6 +60,12 @@ Câu lệnh `p = a` sai, do p là một con trỏ, a là một số nguyên. Kh�
 
 - [x] 776. Hãy khai báo biến con trỏ p các số nguyên và viết lệnh cấp phát không gian bộ nhớ để biến con trỏ p có thể chứa 100 số nguyên. Sau đó viết lệnh thu hồi lại không gian bộ nhớ đã cấp phát cho con trỏ.
 - [x] 777. Viết hàm hoán vị 2 số nguyên bằng cách sử dụng kỹ thuật con trỏ.
+
+### New exercises
+- [ ] 308.Cho mảng một chiều các số thực a. Hãy tạo mảng b từ mảng a, sao cho mảng b chỉ chứa các giá trị âm.
+- [x] 468.(*) Xây dựng ma phương bậc A (n x n). Một ma trận được gọi là ma phương khi tổng các phần tử trên các dòng, các cột và 2 đường chéo 
+chính phụ đều bằng nhau.
+
 
 
 ## Bit, byte, two's complement

@@ -6,13 +6,20 @@ using namespace std;
 
 // Assumption: from year 1950 to 2049
 
-struct Thesis {
+struct Thesis 
+{
     string code;
     string title;
     string studentName;
     string professorName;
     short int yearPublished = 2022;
 };
+
+void checkInput(const string &input, const int &length) 
+{
+    if (input.size() == 0 || input.size() > length) 
+        cout << "Invalid.\n";
+}
 
 void inputThesisList(vector<Thesis>& ThesisList) {
     ThesisList.clear();
@@ -28,27 +35,19 @@ void inputThesisList(vector<Thesis>& ThesisList) {
 
         cout << "Thesis Code (max 10 characters): ";
         cin >> newThesis.code;
-        if (newThesis.code.size() == 0 || newThesis.code.size() > 10) {
-            cout << "Invalid.\n";
-        }
+        checkInput(newThesis.code, 10));
 
         cout << "Thesis Title (max 100 characters): ";
         cin >> newThesis.title;
-        if (newThesis.title.size() == 0 || newThesis.title.size() > 100) {
-            cout << "Invalid.\n";
-        }
+        checkInput(newThesis.title, 100);
 
         cout << "Student (max 30 characters): ";
         cin >> newThesis.studentName;
-        if (newThesis.studentName.size() == 0 || newThesis.studentName.size() > 30) {
-            cout << "Invalid.\n";
-        }
+        checkInput(newThesis.studentName, 30);
 
         cout << "Professor (max 30 characters): ";
         cin >> newThesis.professorName;
-        if (newThesis.professorName.size() == 0 || newThesis.professorName.size() > 30) {
-            cout << "Invalid.\n";
-        }
+        checkInput(newThesis.professorName, 30);
 
         cout << "Year published (4 characters, between 1950 and 2049): ";
         cin >> newThesis.yearPublished;

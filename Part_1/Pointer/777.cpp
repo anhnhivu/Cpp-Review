@@ -1,8 +1,7 @@
 #include <iostream>
 
-using namespace std;
-
-void swap(int* p1, int* p2) {
+void swap(int *p1, int *p2) 
+{
     int tmp;
     tmp = *p1;
     *p1 = *p2;
@@ -10,19 +9,19 @@ void swap(int* p1, int* p2) {
     return;
 }
 
-int main() {
-
+int main() 
+{
     int a;
     int b;
-    cout << "Enter a: ";
-    cin >> a;
-    cout << "Enter b: ";
-    cin >> b;
+    std::cout << "Enter a: ";
+    std::cin >> a;
+    std::cout << "Enter b: ";
+    std::cin >> b;
 
     swap(&a, &b);
     
-    cout << "a = " << a << "\n";
-    cout << "b = " << b << "\n";
+    std::cout << "a = " << a << "\n";
+    std::cout << "b = " << b << "\n";
 
     return 0;
 }

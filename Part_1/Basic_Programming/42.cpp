@@ -1,29 +1,28 @@
 #include <iostream>
 
-using namespace std;
-
-int largestPossibleK(int n) {
+int largestPossibleK(int n) 
+{
     if (n == 1)
         return 1;
         
     int k = 1;
     int sum = 0;
-    while (sum < n - k) {
+    while (sum + k < n) {
         sum += k;
         k++;
     }
-    return (k-1);
+    return k - 1;
 }
 
 int main() {
     int n;
-    cout << "Enter a positive integer: ";
-    cin >> n;
+    std::cout << "Enter a positive integer: ";
+    std::cin >> n;
 
     if (n < 1)
-        cout << "Not a valid positive integer.\n";
+        std::cout << "Not a valid positive integer.\n";
     else
-        cout << "Largest k so that S(k) < " << n << " is: " << largestPossibleK(n) << "\n";
+        std::cout << "Largest k so that S(k) < " << n << " is: " << largestPossibleK(n) << "\n";
 
     return 0;
 }
