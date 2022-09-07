@@ -1,20 +1,5 @@
 # Exercise
 
-### 001. Two’s complement
-Given an array of 8-bit unsigned numbers {0, 1, 2, 126, 127, 128, 129, 130, 254, 255}, write a program
-- Calculate two’s complement value of the binary based on its bits
-- Keep in mind time and space complexity
-
-### 002. Reversed Polish Notation
-Write a program to calculate an arithmetic expression in infix notation
-- Convert it from infix notation to postfix notation
-- Derive the result from the postfix notation
-Example
-
-- Input: ((2 + 9) * 3) - 5
-- Postfix notation: 2 9 + 3 * 5 -
-- Result: 28
-
 ### 003. Big integer
 Let’s implement a program to calculate the signed big integer 128bit, only using the build-in type in C++.
 - Read and write value with console.
@@ -22,15 +7,6 @@ Let’s implement a program to calculate the signed big integer 128bit, only usi
 - Read and write value with the binary file in big-endian and little-endian.
 - Overload the operators: + - * / < > == !=
 - Calculate the reversed Polish notation formula input from the console.
-
-### 004. AVL tree demo
-Write a program to tell your friends about how AVL tree work
-
-- Implement the data structure of the AVL tree, including operations insertion, deletion, search
-
-- Rotate the tree to be balanced during insertion and deletion
-    - Be noted of four cases of imbalance: left-left, left-right, right-right and right-left
-    - Make sure to classify imbalance into correct cases and rebalance the tree with proper rotation operations including left rotation and right rotation
 
 ### 005. Reader - Writer problem
 

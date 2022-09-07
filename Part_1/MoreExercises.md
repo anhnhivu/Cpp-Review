@@ -34,3 +34,7 @@
 - [ ] 716. Cho bàn cờ vua kích thước (8x8). Hãy sắp 8 quân hậu vào bàn cờ sao cho không có bất kỳ 2 quân hậu nào có thể ăn nhau.
 - [ ] 717. Cho bàn cờ vua kích thước (8x8). Hãy di chuyển quân mã trên khắp bàn cờ sao cho mỗi ô đi qua đúng một lần.
 - [ ] 729.Cho mảng một chiều các số nguyên. Hãy viết hàm đệ quy sắp xếp các giá trị chẵn trong mảng tăng dần, các giá trị lẻ vẫn giữ nguyên giá trị và vị trí trong mảng.
+
+## BT bit/byte
+
+- Level: Hard. [Find the element that appears once](https://www.geeksforgeeks.org/find-the-element-that-appears-once/)

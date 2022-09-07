@@ -1,6 +1,6 @@
 # Part 1: Programming with C++
 
-## Basic Programming -> updated
+## Basic Programming
 
 - [x] 23. Đếm số lượng “ước số” của số nguyên dương n.
 - [x] 42. Cho n là số nguyên dương. Hãy tìm giá trị nguyên dương k lớn nhất sao  cho S(k) < n. 
@@ -61,12 +61,41 @@ Câu lệnh `p = a` sai, do p là một con trỏ, a là một số nguyên. Kh�
 ### New exercises
 - [x] 308. Cho mảng một chiều các số thực a. Hãy tạo mảng b từ mảng a, sao cho mảng b chỉ chứa các giá trị âm.
 - [x] 468.(*) Xây dựng ma phương bậc A (n x n). Một ma trận được gọi là ma phương khi tổng các phần tử trên các dòng, các cột và 2 đường chéo 
-chính phụ đều bằng nhau. -> updated
+chính phụ đều bằng nhau.
 
 
 
 ## Bit, byte, two's complement
 
+- [x] 001. Two’s complement
+
+Given an array of 8-bit unsigned numbers {0, 1, 2, 126, 127, 128, 129, 130, 254, 255}, write a program
+- Calculate two’s complement value of the binary based on its bits
+- Keep in mind time and space complexity
+
+- [x] 010. [Find the Missing Number](https://www.geeksforgeeks.org/find-the-missing-number/)
+
+Given an array arr[] of size N-1 with integers in the range of [1, N], the task is to find the missing number from the first N integers.
+
+Note: There are no duplicates in the list.
+
+```
+Input: arr[] = {1, 2, 4, 6, 3, 7, 8}, N = 8
+Output: 5
+Explanation: The missing number between 1 to 8 is 5
+
+Input: arr[] = {1, 2, 3, 5}, N = 5
+Output: 4
+Explanation: The missing number between 1 to 5 is 4
+```
+
+Solution:
+
+XOR has certain properties
+```
+Assume a_1 ⊕ a_2 ⊕ a_3 ⊕ . . . ⊕ a_n = a and a_1 ⊕ a_2 ⊕ a_3 ⊕ . . . ⊕ a_n-1 = b
+Then a ⊕ b = a_n
+```
 
 
 ## String
@@ -79,7 +108,31 @@ chính phụ đều bằng nhau. -> updated
     - We want to reformat the string s such that each group contains exactly k characters, except for the first group, which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash inserted between two groups, and you should convert all lowercase letters to uppercase.
     - Return the reformatted license key.
 
+- [x] 12. [Integer to Roman](https://leetcode.com/problems/integer-to-roman/)
 
+Roman numerals are represented by seven different symbols: `I`, `V`, `X`, `L`, `C`, `D` and `M`.
+
+```
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+```
+
+For example, `2` is written as `II` in Roman numeral, just two one's added together. `12` is written as `XII`, which is simply `X` + `II`. The number `27` is written as `XXVII`, which is `XX + V + II`.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not `IIII`. Instead, the number four is written as `IV`. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+
+- `I` can be placed before `V (5)` and `X (10)` to make `4` and `9`. 
+- `X` can be placed before `L (50)` and `C (100)` to make `40` and `90`. 
+- `C` can be placed before `D (500)` and `M (1000)` to make `400` and `900`.
+
+Given an integer, convert it to a roman numeral.
 
 ## File stream
 
@@ -87,6 +140,10 @@ chính phụ đều bằng nhau. -> updated
 
 ## OOP
 
+
+
+
 ## Reference
 - [1] Bài tập Kỹ thuật lập trình, Nguyễn Tấn Trần Minh Khang, Nhà sách ĐH KHTN TP. HCM
 - [2] LeetCode
+- [3] Geeksforgeeks
