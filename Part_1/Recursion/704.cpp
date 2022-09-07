@@ -1,34 +1,33 @@
 #include <iostream>
 
-using namespace std;
-
-const int MAX_VALUE = 100;   // Assume that array contains no more than 100 values.
-
-int sumOfEvenNumbers(int arr[MAX_VALUE], int lenArr, int sum) {
-    if (lenArr == 0) {
+int sumOfEvenNumbers(int arr[], int lenArr, int sum) 
+{
+    if (lenArr == 0) 
         return sum;
-    }
-
     if (arr[lenArr - 1] % 2 == 0)
         sum += arr[lenArr - 1];
-    
     return sumOfEvenNumbers(arr, lenArr - 1, sum);
 }
 
-int main() {
-
+int main() 
+{
     int lenArr;
-    cout << "Enter length of your array: ";
-    cin >> lenArr;
+    std::cout << "Enter length of your array: ";
+    std::cin >> lenArr;
 
-    int arr[MAX_VALUE];
-    cout << "Enter the numbers in the array: \n";
-    for (int i = 0; i < lenArr; i++) {
-        cout << i + 1 << ": ";
-        cin >> arr[i];
+    int *arr = new int[lenArr];
+    std::cout << "Enter the numbers in the array: \n";
+    for (int i = 0; i < lenArr; i++) 
+    {
+        std::cout << i + 1 << ": ";
+        std::cin >> arr[i];
     }
 
-    cout << sumOfEvenNumbers(arr, lenArr, 0);
+    std::cout << sumOfEvenNumbers(arr, lenArr, 0);
     
+    if (arr != nullptr)
+        delete [] arr;
+    arr = nullptr;
+
     return 0;
 }

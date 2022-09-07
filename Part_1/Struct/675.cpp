@@ -2,10 +2,6 @@
 #include <string.h>
 #include <vector>
 
-using namespace std;
-
-// Assumption: from year 1950 to 2049
-
 struct Thesis 
 {
     string code;
@@ -18,97 +14,100 @@ struct Thesis
 void checkInput(const string &input, const int &length) 
 {
     if (input.size() == 0 || input.size() > length) 
-        cout << "Invalid.\n";
+        std::cout << "Invalid.\n";
 }
 
-void inputThesisList(vector<Thesis>& ThesisList) {
+void inputThesisList(vector<Thesis>& ThesisList) 
+{
     ThesisList.clear();
 
     int numberOfThesis = 0;
-    cout << "Insert number of theses: ";
-    cin >> numberOfThesis;
+    std::cout << "Insert number of theses: ";
+    std::cin >> numberOfThesis;
 
-    for (int i = 0; i < numberOfThesis; i++) {
-
-        cout << "Enter the detail for thesis number " << i + 1 << ": \n";
+    for (int i = 0; i < numberOfThesis; i++) 
+    {
+        std::cout << "Enter the detail for thesis number " << i + 1 << ": \n";
         Thesis newThesis;
 
-        cout << "Thesis Code (max 10 characters): ";
-        cin >> newThesis.code;
+        std::cout << "Thesis Code (max 10 characters): ";
+        std::cin >> newThesis.code;
         checkInput(newThesis.code, 10));
 
-        cout << "Thesis Title (max 100 characters): ";
-        cin >> newThesis.title;
+        std::cout << "Thesis Title (max 100 characters): ";
+        std::cin >> newThesis.title;
         checkInput(newThesis.title, 100);
 
-        cout << "Student (max 30 characters): ";
-        cin >> newThesis.studentName;
+        std::cout << "Student (max 30 characters): ";
+        std::cin >> newThesis.studentName;
         checkInput(newThesis.studentName, 30);
 
-        cout << "Professor (max 30 characters): ";
-        cin >> newThesis.professorName;
+        std::cout << "Professor (max 30 characters): ";
+        std::cin >> newThesis.professorName;
         checkInput(newThesis.professorName, 30);
 
-        cout << "Year published (4 characters, between 1950 and 2049): ";
-        cin >> newThesis.yearPublished;
-        if (newThesis.yearPublished < 1950 || newThesis.yearPublished > 2049) {
-            cout << "Invalid.\n";
-        }
+        std::cout << "Year published (4 characters, between 1950 and 2049): ";
+        std::cin >> newThesis.yearPublished;
+        if (newThesis.yearPublished < 1950 || newThesis.yearPublished > 2049) 
+            std::cout << "Invalid.\n";
 
         ThesisList.push_back(newThesis);
     }
 }
 
-void printThesisList(const vector<Thesis> &ThesisList) {
+void printThesisList(const vector<Thesis> &ThesisList) 
+{
     int lenOfList = ThesisList.size();
-    cout << "\nList of Theses: \n";
-    for (int i = 0; i < lenOfList; i++) {
+    std::cout << "\nList of Theses: \n";
+    for (int i = 0; i < lenOfList; i++) 
+    {
         Thesis tmp = ThesisList[i];
-        cout << i + 1 << ". Code: " << tmp.code << ", Title: " << tmp.title << ", Student: " << tmp.studentName << ", Professor: " << tmp.professorName << ", Year: " << tmp.yearPublished << ".\n";
+        std::cout << i + 1 << ". Code: " << tmp.code << ", Title: " << tmp.title << ", Student: " << tmp.studentName << ", Professor: " << tmp.professorName << ", Year: " << tmp.yearPublished << ".\n";
     }
 }
 
-void yearWithMostTheses(const vector<Thesis>& ThesisList) {
+void yearWithMostTheses(const vector<Thesis> &ThesisList) 
+{
     int freqThesesInYear[100];
     int lenOfList = ThesisList.size();
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++) 
         freqThesesInYear[i] = 0;
-    }
-    for (int i = 0; i < lenOfList; i++) {
+    
+    for (int i = 0; i < lenOfList; i++) 
         freqThesesInYear[ThesisList[i].yearPublished - 1950]++;
-    }
+    
 
     short int yearWithMost = 0;
     int maxNumberOfTheses = 0;
-    for (int i = 0; i < 100; i++) {
-        if (freqThesesInYear[i] > maxNumberOfTheses) {
+    for (int i = 0; i < 100; i++) 
+        if (freqThesesInYear[i] > maxNumberOfTheses)
+        {
             yearWithMost = i;
             maxNumberOfTheses = freqThesesInYear[i];
         }
-    }
-    cout << "\nYear with the highest number of theses is: " << yearWithMost + 1950 << "\n";
+    std::cout << "\nYear with the highest number of theses is: " << yearWithMost + 1950 << "\n";
 }
 
-void mostRecentTheses(const vector<Thesis>& ThesisList) {
-
+void mostRecentTheses(const vector<Thesis> &ThesisList) 
+{
     short int mostRecentYear = 1950;
     int lenOfList = ThesisList.size();
-    for (int i = 0; i < lenOfList; i++) {
-        if (ThesisList[i].yearPublished > mostRecentYear) {
+    for (int i = 0; i < lenOfList; i++) 
+        if (ThesisList[i].yearPublished > mostRecentYear) 
             mostRecentYear = ThesisList[i].yearPublished;
-        }
-    }
-    cout << "\nMost recent theses are in year " << mostRecentYear << ": \n";
-    for (int i = 0; i < lenOfList; i++) {
-        if (ThesisList[i].yearPublished == mostRecentYear) {
+        
+    
+    std::cout << "\nMost recent theses are in year " << mostRecentYear << ": \n";
+    for (int i = 0; i < lenOfList; i++) 
+        if (ThesisList[i].yearPublished == mostRecentYear) 
+        {
             Thesis tmp = ThesisList[i];
-            cout << i + 1 << ". Code: " << tmp.code << ", Title: " << tmp.title << ", Student: " << tmp.studentName << ", Professor: " << tmp.professorName << ", Year: " << tmp.yearPublished << ".\n";
+            std::cout << i + 1 << ". Code: " << tmp.code << ", Title: " << tmp.title << ", Student: " << tmp.studentName << ", Professor: " << tmp.professorName << ", Year: " << tmp.yearPublished << ".\n";
         }
-    }
 }
 
-int main() {
-
+int main() 
+{
     vector<Thesis> ThesisList;
     inputThesisList(ThesisList);
     printThesisList(ThesisList);

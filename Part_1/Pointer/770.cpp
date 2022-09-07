@@ -6,7 +6,8 @@ struct Fraction
     int denominator;
 };
 
-int main() {
+int main() 
+{
     Fraction *p;
     return 0;
 }

@@ -1,28 +1,24 @@
 #include <iostream>
 
-using namespace std;
-
-bool allEvenDigits(int n) {
+bool allEvenDigits(int n) 
+{
     if (n == 0)
         return true;
-    if ((n % 10) % 2 == 1)
+    if (n % 2 == 1)
         return false;
-    else
-        return allEvenDigits(n / 10);
+    return allEvenDigits(n / 10);
 }
 
-int main() {
-
+int main() 
+{
     int n;
-    cout << "Enter a positive integer: ";
-    cin >> n;
+    std::cout << "Enter a positive integer: ";
+    std::cin >> n;
 
-    if (allEvenDigits(n)) {
-        cout << n << " contains only even digits.\n";
-    }
-    else {
-        cout << n << " does not contain only even digits.\n";
-    }
+    if (allEvenDigits(n)) 
+       std:: cout << n << " contains only even digits.\n";
+    else 
+        std::cout << n << " does not contain only even digits.\n";
     
     return 0;
 }

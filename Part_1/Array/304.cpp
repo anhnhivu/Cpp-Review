@@ -1,57 +1,58 @@
 #include <iostream>
 
-using namespace std;
-
-const int MAX_VALUE = 100;   // Assume that array contains no more than 100 values.
-
-void segmentHasSumEqualsM(int arr[MAX_VALUE], int lenArr, int m) {
-
+void segmentHasSumEqualsM(int *arr, int lenArr, int m) 
+{
     int indexLeft = 0;
-    int indexRight = lenArr;
+    int indexRight = lenArr - 1;
     int sumSegment = 0;
     bool foundSegment = false;
 
-    for (int i = 0; i < lenArr && !foundSegment; i++) {
+    for (int i = 0; i < lenArr && !foundSegment; i++) 
+    {
         sumSegment += arr[i];
         indexRight = i;
-        while (sumSegment > m) {
+        while (sumSegment > m) 
+        {
             sumSegment -= arr[indexLeft];
             indexLeft++;
         }
-        if (sumSegment == m) {
+        if (sumSegment == m) 
             foundSegment = true;
-        }
     }
-    if (foundSegment) {
-        cout << "Found segment: [";
-        for (int i = indexLeft; i < indexRight; i++) {
-            cout << arr[i] << ", ";
-        }
-        cout << arr[indexRight] << "].\n";
+    if (foundSegment) 
+    {
+        std::cout << "Found segment: [";
+        for (int i = indexLeft; i < indexRight; i++) 
+            std::cout << arr[i] << ", ";
+        std::cout << arr[indexRight] << "].\n";
+        return;
     }
-    else {
-        cout << "No segment found.\n";
-    }
+    
+    std::cout << "No segment found.\n";
 }
 
-int main() {
-
+int main() 
+{
     int lenArr;
-    cout << "Enter length of your array: ";
-    cin >> lenArr;
+    std::cout << "Enter the length of your array: ";
+    std::cin >> lenArr;
 
-    int arr[MAX_VALUE];
-    cout << "Enter the numbers in the array: \n";
-    for (int i = 0; i < lenArr; i++) {
-        cout << i + 1 << ": ";
-        cin >> arr[i];
+    int *arr = new int[lenArr];
+    std::cout << "Enter the numbers in the array: \n";
+    for (int i = 0; i < lenArr; i++) 
+    {
+        std::cout << i + 1 << ": ";
+        std::cin >> arr[i];
     }
 
     int m;
-    cout << "Enter a number M: ";
-    cin >> m;
+    std::cout << "Enter a number M: ";
+    std::cin >> m;
 
     segmentHasSumEqualsM(arr, lenArr, m);
     
+    if (arr != nullptr)
+        delete[] arr;
+    arr = nullptr;
     return 0;
 }

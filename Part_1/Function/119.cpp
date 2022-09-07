@@ -1,39 +1,35 @@
 #include <iostream>
 #include <math.h>
 
-using namespace std;
-
-bool isPrime(int k) {
-    if (k <= 1) 
+bool isPrime(int k)
+{
+    if (k <= 1)
         return false;
-    for (int i = 2; i <= sqrt(k); i++) {
+    for (int i = 2; i <= sqrt(k); i++)
         if (k % i == 0)
             return false;
-    }
     return true;
 }
 
-void printSmallerPrimeNumbers(int n) {
-    cout << "List of prime numbers smaller than " << n << ":";
-    if (n <= 2) {
-        cout << " None.\n";
-        return;
-    }
-    for (int i = 2; i < n; i++) {
-        if (isPrime(i)) {
-            cout << " " << i;
-        }
-    }
-    cout << ".\n";
+void printSmallerPrimeNumbers(int n)
+{
+    std::cout << "List of prime numbers smaller than " << n << ": ";
+    if (n <= 2)
+        std::cout << "None.";
+    for (int i = 2; i < n; i++)
+        if (isPrime(i))
+            std::cout << i << " ";
+    std::cout << "\n";
 }
 
-int main() {
+int main()
+{
     int n;
-    cout << "Enter a positive integer: ";
-    cin >> n;
+    std::cout << "Enter a positive integer: ";
+    std::cin >> n;
 
     if (n < 1)
-        cout << "Not a valid integer";
+        std::cout << "Not a valid integer";
     else
         printSmallerPrimeNumbers(n);
 

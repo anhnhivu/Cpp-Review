@@ -9,18 +9,15 @@ class SquareMatrix
     {
         int sumOfFirstRow = 0;
         for (int i = 0; i < length; i++) 
-        {
             sumOfFirstRow += sqMatrix[0][i];
-        }
 
         int sumOfSubsequentRow = 0;
         for (int i = 1; i < length; i++)
         {
             sumOfSubsequentRow = 0;
             for (int j = 0; j < length; j++)
-            {
                 sumOfSubsequentRow += sqMatrix[i][j];
-            }
+            
             if (sumOfSubsequentRow != sumOfFirstRow)
                 return false;
         }
@@ -32,18 +29,15 @@ class SquareMatrix
     {
         int sumOfFirstColumn = 0;
         for (int i = 0; i < length; i++)
-        {
             sumOfFirstColumn += sqMatrix[i][0];
-        }
 
         int sumOfSubsequentColumn = 0;
         for (int j = 1; j < length; j++)
         {
             sumOfSubsequentColumn = 0;
             for (int i = 0; i < length; i++)
-            {
                 sumOfSubsequentColumn += sqMatrix[i][j];
-            }
+            
             if (sumOfSubsequentColumn != sumOfFirstColumn)
                 return false;
         }
@@ -54,14 +48,11 @@ class SquareMatrix
     bool checkSumOfDiagonals()
     {
         int sumMainDiagonal = 0;
+        int sumSubDiagonal = 0;
+
         for (int i = 0; i < length; i++)
         {
             sumMainDiagonal += sqMatrix[i][i];
-        }
-
-        int sumSubDiagonal = 0;
-        for (int i = 0; i < length; i++)
-        {
             sumSubDiagonal += sqMatrix[length - i - 1][i];
         }
 
@@ -74,22 +65,17 @@ public:
         sqMatrix = new int* [n];
         length = n;
         for (int i = 0; i < n; i++)
-        {
             sqMatrix[i] = new int[n];
-        }
     }
 
     void input() 
     {
         std::cout << "Type the values in the matrix: ";
-
         for (int i = 0; i < length; i++) 
         {
             std::cout << "Line " << i << ": \n";
             for (int j = 0; j < length; j++)
-            {
                 std::cin >> sqMatrix[i][j];
-            }
         }
     }
 
@@ -99,9 +85,7 @@ public:
         for (int i = 0; i < length; i++)
         {
             for (int j = 0; j < length; j++)
-            {
                 std::cout << sqMatrix[i][j] << " ";
-            }
             std::cout << "\n";
         }
         std::cout << "\n";
@@ -116,9 +100,14 @@ public:
     {
         for (int i = 0; i < length; i++)
         {
-            delete[] sqMatrix[i];
+            if (sqMatrix[i] != nullptr)
+                delete[] sqMatrix[i];
+            sqMatrix[i] = nullptr;
         }
-        delete[] sqMatrix;
+
+        if (sqMatrix != nullptr)
+            delete[] sqMatrix;
+        sqMatrix = nullptr;
     }
 };
 
@@ -136,11 +125,11 @@ int main()
         std::cout << "Not a valid positive integer";
     }
 
-    SquareMatrix * squareMatrix = new SquareMatrix(n);
-    squareMatrix->input();
-    squareMatrix->print();
+    SquareMatrix squareMatrix(n);
+    squareMatrix.input();
+    squareMatrix.print();
 
-    if (squareMatrix->isSpecial())
+    if (squareMatrix.isSpecial())
         std::cout << "This matrix is a special matrix.\n";
     else
         std::cout << "This matrix is not a special matrix.\n";

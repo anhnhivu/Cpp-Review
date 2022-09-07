@@ -19,8 +19,6 @@ Trong đó chuỗi S(k) được định nghĩa như sau : S(k) = 1 + 2 + 3 + ..
 
 - [x] 157. Cho mảng một chiều các số thực, hãy tìm đoạn [a,b] sao cho đoạn này chứa tất cả các giá trị trong mảng (timdoan).
 - [x] 169.(*) Cho mảng một chiều các số nguyên. Hãy viết hàm tìm số chẵn lớn nhất nhỏ hơn mọi giá trị lẻ có trong mảng.
-- [x] 253. Hãy cho biết tất cả các phần tử trong mảng a có nằm trong mảng b hay không?
-
 - [x] 304.(*) Cho mảng một chiều các số nguyên và một số nguyên M. Hãy tìm một mảng con sao cho tổng các phần tử trong mảng bằng M.
 
 ## Struct
@@ -41,7 +39,6 @@ Trong đó chuỗi S(k) được định nghĩa như sau : S(k) = 1 + 2 + 3 + ..
 - [x] 704. Cho mảng một chiều các số nguyên. Viết hàm tính tổng các số chẵn trong mảng bằng phương pháp đệ qui.
 - [x] 718.Cho mảng một chiều các số nguyên. Viết hàm đệ qui xuất mảng.
 - [x] 719.Cho mảng một chiều các số nguyên. Viết hàm đệ qui xuất mảng theo thứ tự từ trái sang phải (xuất ngược).
-- [x] 728. Cho mảng một chiều các số thực. Hãy viết hàm đệ quy sắp xếp các giá trị trong mảng tăng dần.
 - [x] 747. Tìm ước số lẻ lớn nhất của số nguyên dương n. Ví dụ n = 100 ước lẻ lớn nhất của 100 là 25.
 - [x] 763. Hãy kiểm tra số nguyên dương n có toàn chữ số chẵn hay không?
 
@@ -62,9 +59,9 @@ Câu lệnh `p = a` sai, do p là một con trỏ, a là một số nguyên. Kh�
 - [x] 777. Viết hàm hoán vị 2 số nguyên bằng cách sử dụng kỹ thuật con trỏ.
 
 ### New exercises
-- [ ] 308.Cho mảng một chiều các số thực a. Hãy tạo mảng b từ mảng a, sao cho mảng b chỉ chứa các giá trị âm.
+- [x] 308. Cho mảng một chiều các số thực a. Hãy tạo mảng b từ mảng a, sao cho mảng b chỉ chứa các giá trị âm.
 - [x] 468.(*) Xây dựng ma phương bậc A (n x n). Một ma trận được gọi là ma phương khi tổng các phần tử trên các dòng, các cột và 2 đường chéo 
-chính phụ đều bằng nhau.
+chính phụ đều bằng nhau. -> updated
 
 
 
@@ -77,7 +74,7 @@ chính phụ đều bằng nhau.
     - Given two strings s and t, determine if they are isomorphic.
     - Two strings s and t are isomorphic if the characters in s can be replaced to get t.
     - All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.
-- [ ] 482. [License Key Formatting](https://leetcode.com/problems/license-key-formatting/)
+- [x] 482. [License Key Formatting](https://leetcode.com/problems/license-key-formatting/)
     - You are given a license key represented as a string s that consists of only alphanumeric characters and dashes. The string is separated into n + 1 groups by n dashes. You are also given an integer k.
     - We want to reformat the string s such that each group contains exactly k characters, except for the first group, which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash inserted between two groups, and you should convert all lowercase letters to uppercase.
     - Return the reformatted license key.

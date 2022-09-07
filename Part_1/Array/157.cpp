@@ -1,45 +1,47 @@
 #include <iostream>
 
-using namespace std;
+int MAX_INTEGER = 2147483647;
+int MIN_INTEGER = -2147483648;
 
-int MAX_NUM = 2147483647;
-int MIN_NUM = -2147483648;
+void findSegment(int *arr, int n) 
+{
+    int minNumber = MAX_INTEGER;
+    int maxNumber = MIN_INTEGER;
 
-void findSegment(int arr[100], int n) {
-    int minNumber = MAX_NUM;
-    int maxNumber = MIN_NUM;
-
-    for (int i = 0; i < n; i++) {
-        if (arr[i] < minNumber) {
+    for (int i = 0; i < n; i++) 
+    {
+        if (arr[i] < minNumber) 
             minNumber = arr[i];
-        }
-        if (arr[i] > maxNumber) {
+        if (arr[i] > maxNumber) 
             maxNumber = arr[i];
-        }
     }
     
-    cout << "Segment contains all values in the array: [" << minNumber << ", " << maxNumber << "].\n";
+    std::cout << "The segment that contains all values in the array: [" << minNumber << ", " << maxNumber << "].\n";
 }
 
-int main() {
-    
+int main() 
+{
     int n;
-    cout << "Enter length of your array: ";
-    cin >> n;
+    std::cout << "Enter length of your array: ";
+    std::cin >> n;
 
-    if (n < 1) {
-        cout << "Not valid.\n";
+    if (n < 1) 
+    {
+        std::cout << "Not valid.\n";
         return 0;
     }
 
-    int arr[100];
-    cout << "Enter the numbers in the array: \n";
-    for (int i = 0; i < n; i++) {
-        cout << i + 1 << ": ";
-        cin >> arr[i];
+    int *arr = new int[n];
+
+    std::cout << "Enter the numbers in the array: \n";
+    for (int i = 0; i < n; i++) 
+    {
+        std::cout << i + 1 << ": ";
+        std::cin >> arr[i];
     }
 
     findSegment(arr, n);
 
+    delete[] arr;
     return 0;
 }

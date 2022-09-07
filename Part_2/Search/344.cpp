@@ -4,46 +4,39 @@
 class Matrix
 {
     double** matrix;
-    int length;
-    int width;
+    int row;
+    int column;
 
 public:
-    Matrix(int a_length, int a_width)
+    Matrix(int a_row, int a_column)
     {
-        length = a_length;
-        width = a_width;
+        row = a_row;
+        column = a_column;
 
-        matrix = new double* [length];
-        
-        for (int i = 0; i < length; i++)
-        {
-            matrix[i] = new double[width];
-        }
+        matrix = new double* [row];
+        for (int i = 0; i < row; i++)
+            matrix[i] = new double[column];
     }
 
     void input() 
     {
         std::cout << "Type the values in the matrix: ";
 
-        for (int i = 0; i < length; i++) 
+        for (int i = 0; i < row; i++) 
         {
             std::cout << "Line " << i << ": \n";
-            for (int j = 0; j < width; j++)
-            {
+            for (int j = 0; j < column; j++)
                 std::cin >> matrix[i][j];
-            }
         }
     }
 
     void print()
     {
         std::cout << "\nPrint Matrix: \n";
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < row; i++)
         {
-            for (int j = 0; j < width; j++)
-            {
+            for (int j = 0; j < column; j++)
                 std::cout << matrix[i][j] << " ";
-            }
             std::cout << "\n";
         }
         std::cout << "\n";
@@ -51,50 +44,43 @@ public:
 
     int numberOfValues() 
     {
-        int totalNumberOfValues = 0;
-
         std::set<double> setOfValues;
-        std::set<double>::iterator it;
+        
+        for (int i = 0; i < row; i++)
+            for (int j = 0; j < column; j++)
+                setOfValues.insert(matrix[i][j]);
+            //     Alternative: 
+            //     auto [iterator,success] = setOfValues.insert(matrix[i][j]);
+            //     if (success)
+            //         cnt++;
 
-        for (int i = 0; i < length; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                if (setOfValues.find(matrix[i][j]) == setOfValues.end())
-                {
-                    totalNumberOfValues++;
-                    setOfValues.insert(matrix[i][j]);
-                }
-            }
-        }
-
-        return totalNumberOfValues;
+        return setOfValues.size();
     }
 
 
     ~Matrix()
     {
-        for (int i = 0; i < length; i++)
-        {
-            delete[] matrix[i];
-        }
-        delete[] matrix;
+        for (int i = 0; i < row; i++)
+            if (matrix[i] != nullptr)
+                delete[] matrix[i];
+        
+        if (matrix != nullptr)
+            delete[] matrix;
     }
 };
 
 int main() 
 {
-    int length;
-    int width;
+    int row;
+    int column;
     
     try
     {
         std::cin.exceptions(std::istream::failbit);
-
-        std::cout << "Length of matrix: ";
-        std::cin >> length;
-        std::cout << "Width of matrix: ";
-        std::cin >> width;
+        std::cout << "row of matrix: ";
+        std::cin >> row;
+        std::cout << "column of matrix: ";
+        std::cin >> column;
     }
     catch (const std::ios::failure &)
     {
@@ -102,11 +88,11 @@ int main()
     }
 
 
-    Matrix * matrix = new Matrix(length, width);
-    matrix->input();
-    matrix->print();
+    Matrix matrix(row, column);
+    matrix.input();
+    matrix.print();
 
-    std::cout << "Number of different values in this matrix is: " << matrix->numberOfValues() << ".\n";
+    std::cout << "Number of different values in this matrix is: " << matrix.numberOfValues() << ".\n";
     
     return 0;
 }
