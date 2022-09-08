@@ -1,0 +1,5 @@
+﻿  Main-rpn.cpp
+C:\Users\nhi.vu\Desktop\Exercise1\Cpp-Review\Main-rpn\Main-rpn\Main-rpn.cpp(15,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nhi.vu\Desktop\Exercise1\Cpp-Review\Main-rpn\Main-rpn\Main-rpn.cpp(40,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nhi.vu\Desktop\Exercise1\Cpp-Review\Main-rpn\Main-rpn\Main-rpn.cpp(72,34): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Main-rpn.vcxproj -> C:\Users\nhi.vu\Desktop\Exercise1\Cpp-Review\Main-rpn\Debug\Main-rpn.exe
