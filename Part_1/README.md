@@ -67,7 +67,7 @@ chính phụ đều bằng nhau.
 
 ## Bit, byte, two's complement
 
-- [x] 001. Two’s complement
+- [x] 001. Two’s complement: this solution works on a string. A new version works with binary is on branch `twos-complement`. 
 
 Given an array of 8-bit unsigned numbers {0, 1, 2, 126, 127, 128, 129, 130, 254, 255}, write a program
 - Calculate two’s complement value of the binary based on its bits
@@ -136,10 +136,15 @@ Given an integer, convert it to a roman numeral.
 
 ## File stream
 
-
+- [x] 011. Perform basic read and write on .txt file operations. 
 
 ## OOP
 
+Four main principles of OOP:
+- **Abstraction** 
+- **Encapsulation**
+- **Inheritance** 
+- **Polymorphism** 
 
 
 
@@ -147,3 +152,4 @@ Given an integer, convert it to a roman numeral.
 - [1] Bài tập Kỹ thuật lập trình, Nguyễn Tấn Trần Minh Khang, Nhà sách ĐH KHTN TP. HCM
 - [2] LeetCode
 - [3] Geeksforgeeks
+- [4] [What is OOP?](https://www.educba.com/what-is-oop/)

@@ -42,6 +42,8 @@ int main()
 
     findSegment(arr, n);
 
-    delete[] arr;
+    if (arr != nullptr)
+        delete[] arr;
+    arr = nullptr;
     return 0;
 }
