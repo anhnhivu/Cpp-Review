@@ -9,7 +9,7 @@ void twosComplement(unsigned char &binary)
     {
         if (flip)
             binary ^= (1 << j);
-        if (binary & (1 << j))
+        else if (binary & (1 << j))
             flip = true;
     }
 }
