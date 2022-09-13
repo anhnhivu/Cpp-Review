@@ -16,13 +16,17 @@ int calculate(const std::string &infix)
     for (int i = 0; i < infix.size(); i++)
     {
         if (infix[i] >= 48 && infix[i] <= 57)
+        {
             postfix += infix[i];
+            postfix += ' ';
+        }
         else if (infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '^')
             operators.push(infix[i]);
         if (infix[i] == ')' || i == infix.size() - 1)
             if (!operators.empty())
             {
                 postfix += operators.top();
+                postfix += ' ';
                 operators.pop();
             }  
     }
