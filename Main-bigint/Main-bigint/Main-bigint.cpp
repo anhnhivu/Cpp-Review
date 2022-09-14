@@ -1,5 +1,8 @@
 #include <iostream>
+#include <fstream>
+
 #include <string>
+#include <vector>
 #include <math.h>
 #include <bitset>
 
@@ -50,32 +53,88 @@ std::string multiplyBy2(const std::string &number, bool carry)
     return ans;
 }
 
+void twosComplement(unsigned char& binary, bool &flip)
+{
+    for (int j = 0; j < 8; j++)
+    {
+        if (flip)
+            binary ^= (1 << j);
+        else if (binary & (1 << j))
+            flip = true;
+    }
+}
+
 class BigInteger
 {
-    char bigint[16];
+    unsigned char bigint[16];
+
+public:
+
+    BigInteger() { clear(); }
+
+    BigInteger(std::string str)
+    {
+        clear();
+        strToBigInt(str);
+    }
 
     void strToBigInt(std::string str)
     {
         int index = 127;
+        bool negative = false;
+
+        if (str[0] == '-')
+        {
+            str.erase(str.begin());
+            negative = true;
+        }       
+
         while (str != "0")
         {
+            if (index < 0)
+            {
+                std::cout << "overflow  " << str << " " << index << "\n\n";
+                overflowWarning();
+                return;
+            }
+
             if (str[str.size() - 1] % 2 == 1) // str[i] % 2 == (str[i] - '0') % 2
                 bigint[index / 8] ^= (1 << ((127 - index) % 8));
             index--;
+
             str = divisionBy2(str);
         }
+
+        if (negative)
+        {
+            bool flip = false;
+            for (int i = 15; i >= 0; i--)
+                twosComplement(bigint[i], flip);
+        }
+            
     }
 
-    std::string bigIntToStr(const BigInteger &a_bigint)
+    std::string bigIntToStr()
     {
         std::string strResult = "";
         int index = 0;
+        bool negative = (bigint[0] & (1 << 7));
+
+        if (negative)
+        {
+            bool flip = false;
+            for (int i = 15; i >= 0; i--)
+                twosComplement(bigint[i], flip);
+        }
 
         while (index < 128) // 0 -> 127
         {
-            strResult = multiplyBy2(strResult, a_bigint.bigint[index / 8] & (1 << ((127 - index) % 8)));
+            strResult = multiplyBy2(strResult, bigint[index / 8] & (1 << ((127 - index) % 8)));
             index++;
         }
+
+        if (negative)
+            strResult = '-' + strResult;
 
         return strResult;
     }
@@ -86,9 +145,11 @@ class BigInteger
             bigint[i] = 0;
     }
 
-public:
-
-    BigInteger() { clear(); }
+    void overflowWarning()
+    {
+        std::cout << "Error: the number you entered is out of range.\n";
+        clear();
+    }
 
     void readConsole()
     {
@@ -100,15 +161,7 @@ public:
 
     void writeConsole()
     {
-        for (int i = 0; i < 16; i++)
-            //std::cout << bigint[i];
-        {
-            std::bitset<8> tmp(bigint[i]);
-            std::cout << tmp << "\n";
-        }
-
-        std::cout << bigIntToStr(*this) << "\n";
-        std::cout << "\n";
+        std::cout << bigIntToStr() << "\n\n";
     }
 
     bool operator == (BigInteger const& obj)
@@ -126,18 +179,63 @@ public:
                 return true;
         return false;
     }
-
     
     ~BigInteger() { clear(); }
 };
 
-int main()
+std::vector<BigInteger> readTextFile(const std::string &filename)
 {
+    std::ifstream textFile(filename);
+    std::string line;
 
+    std::vector<BigInteger> listOfBigInt;
+    listOfBigInt.clear();
+
+    if (textFile.is_open())
+    {
+        while (getline(textFile, line))
+        {
+            //std::cout << line << "\n";
+            BigInteger tmp = BigInteger(line);
+            listOfBigInt.push_back(tmp);
+        }
+    }
+
+    textFile.close();
+    return listOfBigInt;
+}
+
+void writeTextFile(std::vector<BigInteger> &listOfBigInt, const std::string& filename)
+{
+    std::ofstream textFile;
+    textFile.open(filename, std::ios::out | std::ios::trunc);
+
+    for (int i = 0; i < listOfBigInt.size(); i++)
+        textFile << listOfBigInt[i].bigIntToStr() << "\n";
+
+    textFile.close();
+}
+
+void rwConsole()
+{
+    // Read and write value with console
     BigInteger bigInt2;
     bigInt2.readConsole();
     bigInt2.writeConsole();
+}
 
+void rwTextFile()
+{
+    // Read and write value with text file
+    std::vector<BigInteger> listOfBigInt = readTextFile("test.txt");
+    writeTextFile(listOfBigInt, "outputTextFile.txt");
+}
+
+int main()
+{
+    // rwConsole();
+
+    // rwTextFile();
 
     return 0;
 }
