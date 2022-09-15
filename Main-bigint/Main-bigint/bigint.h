@@ -10,6 +10,7 @@ private:
 public:
     BigInteger();
     BigInteger(std::string str);
+    BigInteger(const BigInteger &another);
 
     unsigned char* getValue();
     unsigned char getChar(const int& indexOfArray);
@@ -18,10 +19,19 @@ public:
 
     void strToBigInt(std::string str);
     std::string bigIntToStr();
+    bool isNegative();
+    bool isNegative(BigInteger number);
 
     // Operator Overloading
-    bool operator == (BigInteger const& another);
-    bool operator != (BigInteger const& another);
+    // BigInteger operator + (const BigInteger& another);
+    // BigInteger operator - (const BigInteger& another);
+    // BigInteger operator * (const BigInteger& another);
+    // BigInteger operator / (const BigInteger& another);
+
+    bool operator < (const BigInteger &another);
+    bool operator > (const BigInteger &another);
+    bool operator == (const BigInteger &another);
+    bool operator != (const BigInteger &another);
 
     ~BigInteger();
 };
@@ -37,3 +47,6 @@ void writeTextFile(const std::string& filename, BigInteger* listOfBigInt, const 
 // Read and write multiple big integers from binary file
 void readBinaryFile(const std::string& filename, BigInteger* listOfBigInt, const int& sizeOfList, bool littleEndian = false);
 void writeBinaryFile(const std::string& filename, BigInteger* listOfBigInt, const int& sizeOfList, bool littleEndian = false);
+
+// Helper functions
+BigInteger twosComplement(const BigInteger& another);

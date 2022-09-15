@@ -19,6 +19,13 @@ BigInteger::BigInteger(std::string str)
     strToBigInt(str);
 }
 
+BigInteger::BigInteger(const BigInteger &another)
+{
+    clear();
+    for (int i = 0; i < 16; i++)
+        bigint[i] = const_cast<BigInteger&>(another).getChar(i);
+}
+
 unsigned char* BigInteger::getValue()
 {
     return bigint;
@@ -49,6 +56,16 @@ void BigInteger::overflowWarning()
 {
     std::cout << "Error: the number you entered is out of range.\n";
     clear();
+}
+
+bool BigInteger::isNegative()
+{
+    return bigint[0] & (1 << 7);
+}
+
+bool BigInteger::isNegative(BigInteger number)
+{
+    return number.getChar(0) & (1 << 7);
 }
 
 void BigInteger::strToBigInt(std::string str)
@@ -89,7 +106,7 @@ std::string BigInteger::bigIntToStr()
 {
     std::string strResult = "";
     int index = 0;
-    bool negative = (bigint[0] & (1 << 7));
+    bool negative = this->isNegative();
 
     if (negative)
     {
@@ -114,18 +131,67 @@ std::string BigInteger::bigIntToStr()
     return strResult;
 }
 
-bool BigInteger::operator == (BigInteger const& obj)
+BigInteger twosComplement(const BigInteger& another)
 {
+    BigInteger number = BigInteger(another);
+    bool flip = false;
+    for (int i = 15; i >= 0; i--)
+    {
+        unsigned char value = number.getChar(i);
+        twosComplement(value, flip);
+        number.setChar(i, value);
+    }
+    return number;
+}
+
+bool BigInteger::operator < (const BigInteger &another)
+{
+    if (*this == another)
+        return false;
+
+    bool firstNumberIsNegative = this->isNegative();
+    bool secondNumberIsNegative = isNegative(another);
+
+    // Different signs
+    if (firstNumberIsNegative ^ secondNumberIsNegative) // one number is negative, one number is positive
+        return firstNumberIsNegative && (!secondNumberIsNegative);
+
+    // Both negative numbers
+    if (firstNumberIsNegative & secondNumberIsNegative)
+    {
+        BigInteger firstNumber(twosComplement(*this));
+        BigInteger secondNumber(twosComplement(another));
+
+        for (int i = 0; i < 16; i++)
+            if (secondNumber.getChar(i) > firstNumber.getChar(i))
+                return false;
+        return true;
+    }
+
+    // Both positive numbers
     for (int i = 0; i < 16; i++)
-        if (bigint[i] != obj.bigint[i])
+        if (bigint[i] > another.bigint[i])
             return false;
     return true;
 }
 
-bool BigInteger::operator != (BigInteger const& obj)
+bool BigInteger::operator > (BigInteger const& another)
+{
+    return !(*this == another) && !(*this < another);
+}
+
+bool BigInteger::operator == (BigInteger const& another)
 {
     for (int i = 0; i < 16; i++)
-        if (bigint[i] != obj.bigint[i])
+        if (bigint[i] != another.bigint[i])
+            return false;
+    return true;
+}
+
+bool BigInteger::operator != (BigInteger const& another)
+{
+    for (int i = 0; i < 16; i++)
+        if (bigint[i] != another.bigint[i])
             return true;
     return false;
 }
@@ -245,3 +311,4 @@ void writeBinaryFile(const std::string& filename, BigInteger* listOfBigInt,
         std::cout << "writeBinaryFile(): Cannot write binary file: " << filename << "\n";
     binaryFile.close();
 }
+

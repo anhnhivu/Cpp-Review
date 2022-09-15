@@ -63,13 +63,21 @@ int main()
 {
     // rwConsole();
 
-    rwTextFile("test/inputTextFile.txt", "test/outputTextFile.txt");
+    // rwTextFile("test/inputTextFile.txt", "test/outputTextFile.txt");
 
     // Big Endian
-    rwBinaryFile("test/inputBinaryFileBigEndian.bin", "test/outputBinaryFileBigEndian.bin");
+    // rwBinaryFile("test/inputBinaryFileBigEndian.bin", "test/outputBinaryFileBigEndian.bin");
 
     // Little Endian
-    rwBinaryFile("test/inputBinaryFileLittleEndian.bin", "test/outputBinaryFileLittleEndian.bin", true);
+    // rwBinaryFile("test/inputBinaryFileLittleEndian.bin", "test/outputBinaryFileLittleEndian.bin", true);
+
+    BigInteger num1("-829");
+    BigInteger num2("-819");
+
+    std::cout << (num1 == num2) << "\n";
+    std::cout << (num1 != num2) << "\n";
+    std::cout << (num1 < num2) << "\n";
+    std::cout << (num1 > num2) << "\n";
 
     return 0;
 }
