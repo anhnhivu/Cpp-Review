@@ -2,7 +2,11 @@
 Main2
 
 Main-bigint/.vs
+Main-bigint/x64
 Main-bigint/Debug
 Main-bigint/Main-bigint/Debug
+Main-bigint/Main-bigint/x64
 Main-bigint/Main-bigint/Main-bigint.vcxproj.filters
 Main-bigint/Main-bigint/Main-bigint.vcxproj.user
+
+Main-bigint/test/inputBinaryFileBigEndian.bin.bak
