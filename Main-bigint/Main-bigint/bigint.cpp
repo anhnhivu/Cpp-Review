@@ -33,16 +33,36 @@ unsigned char* BigInteger::getValue()
 
 unsigned char BigInteger::getChar(const int& indexOfArray)
 {
+    if (indexOfArray < 0 || indexOfArray >= 16)
+    {
+        std::cout << "Error getChar(): parameter out of range 0-15.\n";
+        return 0;
+    }
     return bigint[indexOfArray];
 }
 
 void BigInteger::setBit(const int &indexOfArray, const int &indexInArray)
 {
-    bigint[indexOfArray] ^= (1 << indexInArray);
+    if (indexOfArray < 0 || indexOfArray >= 16)
+    {
+        std::cout << "Error setBit(): first parameter out of range 0-15.\n";
+        return;
+    }
+    if (indexInArray < 0 || indexInArray >= 8)
+    {
+        std::cout << "Error setBit(): second parameter out of range 0-7.\n";
+        return;
+    }
+    bigint[indexOfArray] ^= (1 << (7 - indexInArray));
 }
 
 void BigInteger::setChar(const int& indexOfArray, char value)
 {
+    if (indexOfArray < 0 || indexOfArray >= 16)
+    {
+        std::cout << "Error setChar(): parameter out of range 0-15.\n";
+        return;
+    }
     bigint[indexOfArray] = value;
 }
 
@@ -66,6 +86,11 @@ bool BigInteger::isNegative()
 bool BigInteger::isNegative(BigInteger number)
 {
     return number.getChar(0) & (1 << 7);
+}
+
+void BigInteger::setSign(bool isNegative)
+{
+    bigint[0] ^= (isNegative << 7);
 }
 
 void BigInteger::strToBigInt(std::string str)
@@ -211,6 +236,86 @@ BigInteger readConsole()
     return number;
 }
 
+BigInteger BigInteger::operator + (const BigInteger& another)
+{
+    BigInteger sum("0");
+    bool carry = 0;
+
+    bool firstNumberIsNegative = this->isNegative();
+    bool secondNumberIsNegative = isNegative(another);
+
+    for (int i = 15; i >= 0; i--)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            bool firstBit = bigint[i] & (1 << j);
+            bool secondBit = another.bigint[i] & (1 << j);
+
+            if (!carry)
+            {
+                if (firstBit ^ secondBit)
+                    sum.setBit(i, 7 - j);
+                if (firstBit & secondBit)
+                    carry = 1;
+            } else {
+                if (!(firstBit ^ secondBit))
+                    sum.setBit(i, 7 - j);
+                if (!(firstBit | secondBit))
+                    carry = 0;
+            }
+        }
+    }
+
+    if (!(firstNumberIsNegative ^ secondNumberIsNegative) && (firstNumberIsNegative ^ isNegative(sum)))
+    {
+        std::cout << "+/- operator: Big Integer Overflow.\n";
+        return BigInteger("0");
+    }
+
+    return sum;
+}
+
+BigInteger BigInteger::operator - (const BigInteger& another)
+{
+    return (*this + twosComplement(another));
+}
+
+BigInteger BigInteger::operator * (const BigInteger& another)
+{
+    BigInteger product("0");
+    //BigInteger firstNumber(*this);
+    //BigInteger secondNumber(another);
+
+    //bool firstNumberIsNegative = this->isNegative();
+    //bool secondNumberIsNegative = isNegative(another);
+
+    //if (firstNumberIsNegative)
+    //    BigInteger firstNumber(twosComplement(*this));
+
+    //if (secondNumberIsNegative)
+    //    BigInteger secondNumber(twosComplement(another));
+
+    //for (int i = 15; i >= 0; i--)
+    //{
+    //    
+    //    for (int j = 0; j < 8; j++)
+    //    {
+    //        bool secondBit = secondNumber.bigint[i] & (1 << j);
+    //        if (secondBit)
+    //        {
+    //            // product = product + (firstNumber << (8 * (15 - i) + j + 1));
+    //        }
+    //    }
+    //}
+
+    //if (firstNumberIsNegative ^ secondNumberIsNegative)
+    //    product.setSign(true);
+    //else
+    //    product.setSign(false);
+
+    return product;
+}
+
 void writeConsole(BigInteger number)
 {
     std::cout << number.bigIntToStr() << "\n";
@@ -245,8 +350,7 @@ void writeTextFile(const std::string& filename, BigInteger* listOfBigInt, const 
     textFile.close();
 }
 
-void readBinaryFile(const std::string& filename, BigInteger* listOfBigInt, 
-                            const int& sizeOfList, bool littleEndian)
+void readBinaryFile(const std::string& filename, BigInteger* listOfBigInt, const int& sizeOfList, bool littleEndian)
 {
     std::ifstream binaryFile(filename, std::ios::binary);
     uint8_t skip;
@@ -279,8 +383,7 @@ void readBinaryFile(const std::string& filename, BigInteger* listOfBigInt,
     binaryFile.close();
 }
 
-void writeBinaryFile(const std::string& filename, BigInteger* listOfBigInt, 
-                            const int& sizeOfList, bool littleEndian)
+void writeBinaryFile(const std::string& filename, BigInteger* listOfBigInt, const int& sizeOfList, bool littleEndian)
 {
     std::ofstream binaryFile;
     binaryFile.open(filename, std::ios::out | std::ios::binary | std::ios::trunc);
@@ -311,4 +414,3 @@ void writeBinaryFile(const std::string& filename, BigInteger* listOfBigInt,
         std::cout << "writeBinaryFile(): Cannot write binary file: " << filename << "\n";
     binaryFile.close();
 }
-

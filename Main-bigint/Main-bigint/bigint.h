@@ -21,17 +21,20 @@ public:
     std::string bigIntToStr();
     bool isNegative();
     bool isNegative(BigInteger number);
+    void setSign(bool isNegative);
 
     // Operator Overloading
-    // BigInteger operator + (const BigInteger& another);
-    // BigInteger operator - (const BigInteger& another);
-    // BigInteger operator * (const BigInteger& another);
+    BigInteger operator + (const BigInteger& another);
+    BigInteger operator - (const BigInteger& another);
+    BigInteger operator * (const BigInteger& another);
     // BigInteger operator / (const BigInteger& another);
 
     bool operator < (const BigInteger &another);
     bool operator > (const BigInteger &another);
     bool operator == (const BigInteger &another);
     bool operator != (const BigInteger &another);
+
+    BigInteger operator << (const int& number);
 
     ~BigInteger();
 };
