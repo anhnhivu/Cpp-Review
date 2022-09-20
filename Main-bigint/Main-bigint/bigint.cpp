@@ -88,11 +88,6 @@ bool BigInteger::isNegative(BigInteger number)
     return number.getChar(0) & (1 << 7);
 }
 
-void BigInteger::setSign(bool isNegative)
-{
-    bigint[0] ^= (isNegative << 7);
-}
-
 void BigInteger::strToBigInt(std::string str)
 {
     int index = 127;
@@ -280,40 +275,89 @@ BigInteger BigInteger::operator - (const BigInteger& another)
     return (*this + twosComplement(another));
 }
 
+BigInteger BigInteger::operator << (const int& number)
+{
+    BigInteger result("0");
+    for (int i = 0; i < 16; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            int ii = i + ((j + number) / 8);
+            int jj = 7 - ((j + number) % 8);
+
+            if (ii < 16 && bigint[ii] & (1 << jj))
+                result.setBit(i, j);
+        }
+    }
+    return result;
+}
+
 BigInteger BigInteger::operator * (const BigInteger& another)
 {
     BigInteger product("0");
-    //BigInteger firstNumber(*this);
-    //BigInteger secondNumber(another);
+    
+    BigInteger firstNumber(*this);
+    BigInteger secondNumber(another);
 
-    //bool firstNumberIsNegative = this->isNegative();
-    //bool secondNumberIsNegative = isNegative(another);
+    bool firstNumberIsNegative = this->isNegative();
+    bool secondNumberIsNegative = isNegative(another);
 
-    //if (firstNumberIsNegative)
-    //    BigInteger firstNumber(twosComplement(*this));
+    if (firstNumberIsNegative)
+        firstNumber = BigInteger("0") - firstNumber;
+    if (secondNumberIsNegative)
+        secondNumber = BigInteger("0") - secondNumber;
 
-    //if (secondNumberIsNegative)
-    //    BigInteger secondNumber(twosComplement(another));
+    for (int i = 15; i >= 0; i--)
+        for (int j = 0; j < 8; j++)
+            if (secondNumber.bigint[i] & (1 << j))
+                product = product + (firstNumber << (8 * (15 - i) + j));
 
-    //for (int i = 15; i >= 0; i--)
-    //{
-    //    
-    //    for (int j = 0; j < 8; j++)
-    //    {
-    //        bool secondBit = secondNumber.bigint[i] & (1 << j);
-    //        if (secondBit)
-    //        {
-    //            // product = product + (firstNumber << (8 * (15 - i) + j + 1));
-    //        }
-    //    }
-    //}
 
-    //if (firstNumberIsNegative ^ secondNumberIsNegative)
-    //    product.setSign(true);
-    //else
-    //    product.setSign(false);
+    if (firstNumberIsNegative ^ secondNumberIsNegative)
+        product = twosComplement(product);
 
     return product;
+}
+
+BigInteger BigInteger::operator / (const BigInteger& another)
+{
+    BigInteger quotient(*this);
+    BigInteger secondNumber(another);
+
+    bool firstNumberIsNegative = this->isNegative();
+    bool secondNumberIsNegative = isNegative(another);
+
+    if (firstNumberIsNegative)
+        quotient = BigInteger("0") - quotient;
+    if (secondNumberIsNegative)
+        secondNumber = BigInteger("0") - secondNumber;
+
+    int digitsInSecondNumber = 0;
+    int ii = 15;
+    int jj = 7; 
+
+    for (int i = 0; i < 15; i++)
+        for (int j = 8; j >= 0; j--)
+            if (secondNumber.bigint[i] & (1 << j))
+            {
+                ii = i;
+                jj = j;
+                digitsInSecondNumber = 128 - (8 * i + 7 - j);
+                break;
+            }
+
+    for (int i = ii; i >= 0; i--)
+        for (int j = jj; j >= 0 && digitsInSecondNumber; j--)
+        {
+            if (secondNumber.bigint[i] & (1 << j))
+                quotient = quotient - (secondNumber << (8 * (15 - i) + j - digitsInSecondNumber));
+            digitsInSecondNumber--;
+        }
+            
+    if (firstNumberIsNegative ^ secondNumberIsNegative)
+        quotient = twosComplement(quotient);
+
+    return quotient;
 }
 
 void writeConsole(BigInteger number)

@@ -71,17 +71,20 @@ int main()
     // Little Endian
     // rwBinaryFile("test/inputBinaryFileLittleEndian.bin", "test/outputBinaryFileLittleEndian.bin", true);
 
-    BigInteger num1("10000");
-    BigInteger num2("-6234");
+    BigInteger num1("60000");
+    BigInteger num2("3000");
 
    /* std::cout << (num1 == num2) << "\n";
     std::cout << (num1 != num2) << "\n";
     std::cout << (num1 < num2) << "\n";
     std::cout << (num1 > num2) << "\n";*/
 
-    writeConsole(num1 + num2);
-    writeConsole(num1 - num2);
-    writeConsole(num1 - num2);
+    //writeConsole(num1 + num2);
+    //writeConsole(num1 - num2);
+    writeConsole(num1 * num2);
+    writeConsole(num1 / num2);
+    //writeConsole(num1 << 2); 
+
 
     return 0;
 }
