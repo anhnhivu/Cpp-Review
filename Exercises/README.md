@@ -17,11 +17,11 @@ Example
 
 ### 003. Big integer
 Let’s implement a program to calculate the signed big integer 128bit, only using the build-in type in C++.
-- Read and write value with console.
-- Read and write value with the text file.
-- Read and write value with the binary file in big-endian and little-endian.
-- Overload the operators: + - * / < > == !=
-- Calculate the reversed Polish notation formula input from the console.
+- [x] Read and write value with console.
+- [x] Read and write value with the text file.
+- [x] Read and write value with the binary file in big-endian and little-endian.
+- [x] Overload the operators: + - * / < > == !=
+- [ ] Calculate the reversed Polish notation formula input from the console.
 
 ### 004. AVL tree demo
 Write a program to tell your friends about how AVL tree work
