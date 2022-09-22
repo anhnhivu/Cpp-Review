@@ -216,9 +216,9 @@ bool BigInteger::operator != (BigInteger const& another)
     return false;
 }
     
-BigInteger::~BigInteger() 
-{ 
-    clear(); 
+BigInteger::~BigInteger()
+{
+    clear();
 }
 
 BigInteger readConsole()
@@ -321,39 +321,38 @@ BigInteger BigInteger::operator * (const BigInteger& another)
 
 BigInteger BigInteger::operator / (const BigInteger& another)
 {
-    BigInteger quotient(*this);
+    
+    BigInteger quotient("0");
+    BigInteger firstNumber(*this);
     BigInteger secondNumber(another);
+
+    if (secondNumber == BigInteger("0"))
+    {
+        std::cout << "operator / error: division by 0.\n";
+        return BigInteger("0");
+    }
 
     bool firstNumberIsNegative = this->isNegative();
     bool secondNumberIsNegative = isNegative(another);
 
     if (firstNumberIsNegative)
-        quotient = BigInteger("0") - quotient;
+        firstNumber = BigInteger("0") - firstNumber;
     if (secondNumberIsNegative)
         secondNumber = BigInteger("0") - secondNumber;
+    
+    while (firstNumber != BigInteger("0"))
+    {
+        firstNumber = firstNumber - secondNumber;
+        quotient = quotient + BigInteger("1");
+    }
 
-    int digitsInSecondNumber = 0;
-    int ii = 15;
-    int jj = 7; 
 
-    for (int i = 0; i < 15; i++)
-        for (int j = 8; j >= 0; j--)
-            if (secondNumber.bigint[i] & (1 << j))
-            {
-                ii = i;
-                jj = j;
-                digitsInSecondNumber = 128 - (8 * i + 7 - j);
-                break;
-            }
+    if (isNegative(quotient))
+    {
+        std::cout << "/ operator: overflow.\n";
+    }
 
-    for (int i = ii; i >= 0; i--)
-        for (int j = jj; j >= 0 && digitsInSecondNumber; j--)
-        {
-            if (secondNumber.bigint[i] & (1 << j))
-                quotient = quotient - (secondNumber << (8 * (15 - i) + j - digitsInSecondNumber));
-            digitsInSecondNumber--;
-        }
-            
+    writeConsole(quotient);
     if (firstNumberIsNegative ^ secondNumberIsNegative)
         quotient = twosComplement(quotient);
 
@@ -377,7 +376,7 @@ void readTextFile(const std::string& filename, BigInteger* listOfBigInt, const i
             if (getline(textFile, line))
                 listOfBigInt[i] = BigInteger(line);
     }
-    else 
+    else
         std::cout << "Cannot read text file: " << filename << "\n";
     textFile.close();
 }
@@ -422,7 +421,7 @@ void readBinaryFile(const std::string& filename, BigInteger* listOfBigInt, const
             listOfBigInt[k] = number;
         }
     }
-    else 
+    else
         std::cout << "readBinaryFile(): Cannot read binary file: " << filename << "\n";
     binaryFile.close();
 }
