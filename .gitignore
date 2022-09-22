@@ -1,2 +1,10 @@
 .vs
 Main2
+
+Main-bigint/Debug/
+Main-bigint/.vs
+Main-bigint/Main-bigint/Debug/
+Main-bigint/Main-bigint/Main-bigint.vcxproj.filters
+Main-bigint/Main-bigint/Main-bigint.vcxproj.user
+Main-bigint/Main-bigint/x64/
+Main-bigint/x64/
