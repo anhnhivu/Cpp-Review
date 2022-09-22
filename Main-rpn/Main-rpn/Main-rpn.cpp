@@ -4,46 +4,101 @@
 #include <math.h>
 #include <string>
 #include <stack>
+#include <queue>
 
-int calculate(const std::string &infix)
+const auto PLUS = '+';
+const auto MINUS = '-';
+const auto MUL = '*';
+const auto DIVIDE = '/';
+const auto POWER = '^';
+
+bool isOperator(const char &currentOperator)
+{
+    return currentOperator == PLUS || currentOperator == MINUS || 
+           currentOperator == MUL || currentOperator == DIVIDE || currentOperator == POWER;
+}
+
+void getTopOperator(std::string &postfix, const std::stack<char> &operators)
+{
+    postfix += operators.top();
+    postfix += ' ';
+}
+
+std::string infixToPostfix(const std::string& infix)
 {
     std::cout << infix << "\n";
     std::string postfix = "";
 
     std::stack<char> operators;
+    int brackets = 0;
 
-    // Convert from infix to postfix notation
     for (int i = 0; i < infix.size(); i++)
-    {
-        if (infix[i] >= 48 && infix[i] <= 57)
+    {        
+        if (infix[i] >= '0' && infix[i] <= '9')
         {
             postfix += infix[i];
-            postfix += ' ';
+            if (i == infix.size() - 1 || infix[i + 1] < '0' || infix[i + 1] > '9')
+                postfix += ' ';      
         }
-        else if (infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '^')
-            operators.push(infix[i]);
-        if (infix[i] == ')' || i == infix.size() - 1)
-            if (!operators.empty())
+        else if (!operators.empty() && (infix[i] == ')' || isOperator(infix[i])))
+        {
+            if (infix[i] == ')' && brackets > 0)
             {
-                postfix += operators.top();
-                postfix += ' ';
+                getTopOperator(postfix, operators);
                 operators.pop();
-            }  
+                brackets--;
+            }
+            if (!operators.empty() && (infix[i] == MUL || infix[i] == DIVIDE || infix[i] == POWER) && (operators.top() == MUL || operators.top() == DIVIDE || infix[i] == POWER))
+            {
+                getTopOperator(postfix, operators);
+                operators.pop();
+            }
+            if (brackets == 0 && !operators.empty() && (operators.top() == MUL || operators.top() == DIVIDE || infix[i] == POWER))
+            {
+                getTopOperator(postfix, operators);
+                operators.pop();
+            }
+            if (!operators.empty() && (infix[i] == PLUS || infix[i] == MINUS) && (operators.top() == PLUS || operators.top() == MINUS))
+            {
+                getTopOperator(postfix, operators);
+                operators.pop();
+            }
+        }
+        if (isOperator(infix[i]))
+            operators.push(infix[i]);
+        if (infix[i] == '(')
+            brackets++;
     }
 
-    // Calculate the result from the postfix notation
-    // Assume all numbers are 1-digit 
+    while (!operators.empty())
+    {
+        getTopOperator(postfix, operators);
+        operators.pop();
+    }
+    return postfix;
+}
 
+int calculatePostfix(const std::string &postfix)
+{
     std::stack<int> operands;
+    int number = 0;
 
     for (int i = 0; i < postfix.size(); i++)
     {
-        if (postfix[i] >= 48 && postfix[i] <= 57)
-            operands.push(int(postfix[i]) - 48);
-        if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/' || postfix[i] == '^')
+        if (postfix[i] >= '0' && postfix[i] <= '9')
         {
-            int firstNum;
-            int secondNum;
+            number = number * 10 + (postfix[i] - '0');
+            if (i == postfix.size() - 1 || postfix[i + 1] == ' ')
+            {
+                operands.push(number);
+                number = 0;
+            }
+        }
+          
+        if (isOperator(postfix[i]) && operands.size() >= 2)
+        {
+            int firstNum = 0;
+            int secondNum = 1;
             if (!operands.empty())
             {
                 secondNum = operands.top();
@@ -55,16 +110,18 @@ int calculate(const std::string &infix)
                 operands.pop();
             }
 
-            if (postfix[i] == '+')
+            if (postfix[i] == PLUS)
                 operands.push(firstNum + secondNum);
-            if (postfix[i] == '-')
+            else if (postfix[i] == MINUS)
                 operands.push(firstNum - secondNum);
-            if (postfix[i] == '*')
+            else if (postfix[i] == MUL)
                 operands.push(firstNum * secondNum);
-            if (postfix[i] == '/')
+            else if (postfix[i] == DIVIDE)
                 operands.push(firstNum / secondNum);
-            if (postfix[i] == '^')
-                operands.push(pow(firstNum, secondNum));
+            else if (postfix[i] == POWER)
+                operands.push((int)pow(firstNum, secondNum)); 
+
+            std::cout << operands.top() << "\n";
         }
     }
 
@@ -88,7 +145,7 @@ int main()
     if (inputFile.is_open())
     {
         while (getline(inputFile, line))
-            calculate(line);
+            calculatePostfix(infixToPostfix(line));
     }
 
     inputFile.close();
