@@ -352,7 +352,6 @@ BigInteger BigInteger::operator / (const BigInteger& another)
         std::cout << "/ operator: overflow.\n";
     }
 
-    writeConsole(quotient);
     if (firstNumberIsNegative ^ secondNumberIsNegative)
         quotient = twosComplement(quotient);
 

@@ -74,16 +74,27 @@ int main()
     BigInteger num1("60000");
     BigInteger num2("3000");
 
-   /* std::cout << (num1 == num2) << "\n";
-    std::cout << (num1 != num2) << "\n";
-    std::cout << (num1 < num2) << "\n";
-    std::cout << (num1 > num2) << "\n";*/
+    std::cout << "num1 = ";
+    writeConsole(num1); 
+    std::cout << "num2 = ";
+    writeConsole(num2); 
 
-    //writeConsole(num1 + num2);
-    //writeConsole(num1 - num2);
+
+    std::cout << "\nnum1 == num2: " << (num1 == num2) << "\n";
+    std::cout << "num1 != num2: " << (num1 != num2) << "\n";
+    std::cout << "num1 < num2: " << (num1 < num2) << "\n";
+    std::cout << "num1 > num2: " << (num1 > num2) << "\n\n";
+
+    std::cout << "num1 + num2 = ";
+    writeConsole(num1 + num2);
+    std::cout << "num1 - num2 = ";
+    writeConsole(num1 - num2);
+    std::cout << "num1 * num2 = ";
     writeConsole(num1 * num2);
+    std::cout << "num1 / num2 = ";
     writeConsole(num1 / num2);
-    //writeConsole(num1 << 2); 
+    std::cout << "num1 << 2 = ";
+    writeConsole(num1 << 2); 
 
 
     return 0;
