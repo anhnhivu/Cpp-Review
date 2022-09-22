@@ -38,7 +38,7 @@
 - [ ] Network programming
 
 ## Exercises:
-- [ ] Two's complement
+- [x] Two's complement
 - [x] Reversed Polish Notation
 - [ ] Big integer
 - [ ] AVL tree demo
