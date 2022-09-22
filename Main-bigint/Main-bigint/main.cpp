@@ -6,8 +6,8 @@
 #include <vector>
 #include <bitset>
 
-#include "bigint.h"
-#include "calculate.h"
+#include "bigint.hpp"
+#include "calculate.hpp"
 
 void rwConsole()
 {

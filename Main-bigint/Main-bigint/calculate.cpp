@@ -1,5 +1,5 @@
 #include <string>
-#include "calculate.h"
+#include "calculate.hpp"
 
 std::string divisionBy2(const std::string& number)
 {

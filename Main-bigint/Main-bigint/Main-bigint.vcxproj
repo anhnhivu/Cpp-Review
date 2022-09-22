@@ -147,8 +147,8 @@
     <Text Include="test.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="calculate.h" />
-    <ClInclude Include="bigint.h" />
+    <ClInclude Include="calculate.hpp" />
+    <ClInclude Include="bigint.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
