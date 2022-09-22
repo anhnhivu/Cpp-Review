@@ -39,7 +39,7 @@
 
 ## Exercises:
 - [x] Two's complement
-- [ ] Reversed Polish Notation
+- [x] Reversed Polish Notation
 - [ ] Big integer
 - [ ] AVL tree demo
 - [ ] Reader - Writer Problem
