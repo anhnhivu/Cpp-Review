@@ -9,14 +9,14 @@
 #include "bigint.hpp"
 #include "calculate.hpp"
 
-void rwConsole()
+void readWriteConsole()
 {
     // Read and write value with console
     BigInteger bigInt2 = readConsole();
     writeConsole(bigInt2);
 }
 
-void rwTextFile(const std::string &inputFile, const std::string &outputFile)
+void readWriteTextFile(const std::string &inputFile, const std::string &outputFile)
 {
     std::ifstream textFile(inputFile, std::ios::in);
     std::string line;
@@ -41,7 +41,7 @@ void rwTextFile(const std::string &inputFile, const std::string &outputFile)
     listOfBigInt = nullptr;
 }
 
-void rwBinaryFile(const std::string& inputFile, const std::string& outputFile, bool littleEndian = false)
+void readWriteBinaryFile(const std::string& inputFile, const std::string& outputFile, bool littleEndian = false)
 {
     std::ifstream binaryFile(inputFile, std::ios::binary);
     uint8_t numbersOfBigInt = 0;
@@ -61,15 +61,15 @@ void rwBinaryFile(const std::string& inputFile, const std::string& outputFile, b
 
 int main()
 {
-    // rwConsole();
+    // readWriteConsole();
 
-    // rwTextFile("test/inputTextFile.txt", "test/outputTextFile.txt");
+    readWriteTextFile("test/inputTextFile.txt", "test/outputTextFile.txt");
 
     // Big Endian
-    // rwBinaryFile("test/inputBinaryFileBigEndian.bin", "test/outputBinaryFileBigEndian.bin");
+    // readWriteBinaryFile("test/inputBinaryFileBigEndian.bin", "test/outputBinaryFileBigEndian.bin");
 
     // Little Endian
-    // rwBinaryFile("test/inputBinaryFileLittleEndian.bin", "test/outputBinaryFileLittleEndian.bin", true);
+    // readWriteBinaryFile("test/inputBinaryFileLittleEndian.bin", "test/outputBinaryFileLittleEndian.bin", true);
 
     BigInteger num1("60000");
     BigInteger num2("3000");

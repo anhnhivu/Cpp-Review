@@ -68,24 +68,12 @@ void BigInteger::setChar(const int& indexOfArray, char value)
 
 void BigInteger::clear()
 {
-    for (int i = 0; i < 16; i++)
-        bigint[i] = 0;
+    memset(bigint, 0, 16 * sizeof(char));
 }
 
-void BigInteger::overflowWarning()
-{
-    std::cout << "Error: the number you entered is out of range.\n";
-    clear();
-}
-
-bool BigInteger::isNegative()
+bool BigInteger::isNegative() const
 {
     return bigint[0] & (1 << 7);
-}
-
-bool BigInteger::isNegative(BigInteger number)
-{
-    return number.getChar(0) & (1 << 7);
 }
 
 void BigInteger::strToBigInt(std::string str)
@@ -104,7 +92,6 @@ void BigInteger::strToBigInt(std::string str)
         if (index < 0)
         {
             std::cout << "overflow  " << str << " " << index << "\n\n";
-            overflowWarning();
             return;
         }
 
@@ -170,7 +157,7 @@ bool BigInteger::operator < (const BigInteger &another)
         return false;
 
     bool firstNumberIsNegative = this->isNegative();
-    bool secondNumberIsNegative = isNegative(another);
+    bool secondNumberIsNegative = another.isNegative();
 
     // Different signs
     if (firstNumberIsNegative ^ secondNumberIsNegative) // one number is negative, one number is positive
@@ -237,7 +224,7 @@ BigInteger BigInteger::operator + (const BigInteger& another)
     bool carry = 0;
 
     bool firstNumberIsNegative = this->isNegative();
-    bool secondNumberIsNegative = isNegative(another);
+    bool secondNumberIsNegative = another.isNegative();
 
     for (int i = 15; i >= 0; i--)
     {
@@ -261,7 +248,7 @@ BigInteger BigInteger::operator + (const BigInteger& another)
         }
     }
 
-    if (!(firstNumberIsNegative ^ secondNumberIsNegative) && (firstNumberIsNegative ^ isNegative(sum)))
+    if (!(firstNumberIsNegative ^ secondNumberIsNegative) && (firstNumberIsNegative ^ sum.isNegative()))
     {
         std::cout << "+/- operator: Big Integer Overflow.\n";
         return BigInteger("0");
@@ -300,7 +287,7 @@ BigInteger BigInteger::operator * (const BigInteger& another)
     BigInteger secondNumber(another);
 
     bool firstNumberIsNegative = this->isNegative();
-    bool secondNumberIsNegative = isNegative(another);
+    bool secondNumberIsNegative = another.isNegative();
 
     if (firstNumberIsNegative)
         firstNumber = BigInteger("0") - firstNumber;
@@ -333,7 +320,7 @@ BigInteger BigInteger::operator / (const BigInteger& another)
     }
 
     bool firstNumberIsNegative = this->isNegative();
-    bool secondNumberIsNegative = isNegative(another);
+    bool secondNumberIsNegative = another.isNegative();
 
     if (firstNumberIsNegative)
         firstNumber = BigInteger("0") - firstNumber;
@@ -347,7 +334,7 @@ BigInteger BigInteger::operator / (const BigInteger& another)
     }
 
 
-    if (isNegative(quotient))
+    if (quotient.isNegative())
     {
         std::cout << "/ operator: overflow.\n";
     }

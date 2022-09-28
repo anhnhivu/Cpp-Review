@@ -5,7 +5,6 @@ class BigInteger
 private:
     unsigned char bigint[16];
     void clear();
-    void overflowWarning(); 
 
 public:
     BigInteger();
@@ -19,8 +18,7 @@ public:
 
     void strToBigInt(std::string str);
     std::string bigIntToStr();
-    bool isNegative();
-    bool isNegative(BigInteger number);
+    bool isNegative() const;
 
     // Operator Overloading
     BigInteger operator + (const BigInteger& another);
@@ -34,7 +32,6 @@ public:
     bool operator > (const BigInteger &another);
     bool operator == (const BigInteger &another);
     bool operator != (const BigInteger &another);
-
 
     ~BigInteger();
 };
